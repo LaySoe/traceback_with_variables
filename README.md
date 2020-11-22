@@ -52,7 +52,7 @@ conda install -c conda-forge traceback-with-variables
 
 Using without code editing, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">running your script/command/module</a>:
 ```
-traceback-with-variables tested_script.py --some-arg some-value
+traceback-with-variables tested_script.py ...srcipt's args...
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage in regular Python</a>, for the whole program:
@@ -253,6 +253,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes: a script, a module, a commnad</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">simple usage in Jupyter or IPython</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_traceback.py">show traceback on demand</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer.py">manually change global printer</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_in_jupyter.py">manually change global printer in Jupyter or IPython</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_customised.py">manually change global printer, customised</a>
