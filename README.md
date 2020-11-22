@@ -52,7 +52,7 @@ conda install -c conda-forge traceback-with-variables
 
 Using without code editing, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">running your script/command/module</a>:
 ```
-traceback-with-variables ...script/tool/module with arguments...
+traceback-with-variables tested_script.py --some-arg some-value
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage in regular Python</a>, for the whole program:
@@ -88,6 +88,17 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     # or
     @prints_tb(file_=LoggerAsFile(logger)): 
 ```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_traceback.py">Print traceback</a> in interactive mode after an exception:
+```
+    >>> print_tb()
+```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_customized.py">Customize</a> global printer:
+```python
+    global_print_tb(fmt=Format(max_value_str_len=80))
+```
+
 
 ### Colors
 
@@ -239,7 +250,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 ### Examples and recipes
 
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes: a script, a module, a commnad</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">simple usage in Jupyter or IPython</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer.py">manually change global printer</a>
@@ -298,6 +309,12 @@ def main():
     override_print_tb(...)
 ```
 
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`print_tb`</a>
+```python
+print_tb()
+```
 ---
 
 #### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`prints_tb`</a>

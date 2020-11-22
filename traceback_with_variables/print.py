@@ -56,7 +56,6 @@ def printing_tb(
     except Exception as e:
         print_tb(
             e=e,
-            tb=None,
             num_skipped_frames=2 if skip_cur_frame else 1,
             fmt=fmt,
             file_=file_
