@@ -7,13 +7,7 @@ def main():
         print(1 / n)
 
     except Exception as e:
-        lines = list(iter_tb_lines(
-            e=e,
-            max_value_str_len=100,
-            max_exc_str_len=1000,
-            ellipsis_='...',
-            num_context_lines=1
-        ))
+        lines = list(iter_tb_lines())
 
         # requests.post('http://myreport.mysite.com/report', data={'lines': lines})
 

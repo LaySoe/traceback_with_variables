@@ -60,7 +60,7 @@ traceback-with-variables ...script/tool/module with arguments...
     from traceback_with_variables import activate_by_import
 ```
 
-<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">Simplest usage in Jupiter or IPython</a>, for the whole program:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">Simplest usage in Jupyter or IPython</a>, for the whole program:
 ```python
     from traceback_with_variables import activate_in_ipython_by_import
 ```
@@ -242,8 +242,9 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">simple usage in Jupyter or IPython</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks.py">a bit more controlled usage</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks_customised.py">a bit more controlled usage, customised</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer.py">manually change global printer</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_in_jupyter.py">manually change global printer in Jupyter or IPython</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_customised.py">manually change global printer, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">working with a function</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function_customised.py">working with a function, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_function.py">working with a function, logging</a>
@@ -251,17 +252,17 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block_customised.py">working with a code block, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">working with a code block, logging</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">get traceback lines for custom things</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines_customized.py">get traceback lines for custom things, customized</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/flask.py">using with `flask`</a>
 
 ### Reference
 
-#### All functions have output customization
+#### All functions have `fmt=` argument, a `Format` object with fields:
 * `max_value_str_len` max length of each variable string, -1 to disable, default=1000
 * `max_exc_str_len` max length of exception, should variable print fail, -1 to disable, default=10000
 * `num_context_lines` number of lines around the target code line to print, default=1
 * `ellipsis_` string to denote long strings truncation, default=`...`
-* `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
-* `color_scheme` one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.auto`, `.none` , `.common`, `.nice`, `.synthwave` 
+* `color_scheme` is `None` or one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.none` , `.common`, `.nice`, `.synthwave`. `None` is for auto-detect. 
 
 ---
 
@@ -281,7 +282,16 @@ from traceback_with_variables import activate_in_ipython_by_import
 
 ---
 
-#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py">`override_print_tb`</a>
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/global_hooks.py">`global_print_tb`</a>
+Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
+```python
+def main():
+    override_print_tb(...)
+```
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/global_hooks.py">`global_print_tb_in_ipython`</a>
 Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
 ```python
 def main():
@@ -348,9 +358,9 @@ Iterates the lines, which are usually printed one-by-one in terminal.
     This is considered a rare use case, so colors are disabled by default when outputting to a file.
     But you can force enable colors by passing `--color-scheme common` (for complete list of colors pass `--help`) console argument.
   
-* `activate_by_import` or `override_print_tb` don't work in Jupiter or IPython as if not called at all.
+* `activate_by_import` or `global_print_tb` don't work in Jupyter or IPython as if not called at all.
 
-    Don't forget to use `ipython=True` or import `activate_in_ipython_by_import` since Jupyer/Ipython handles exceptions differently than regular Python.  
+    In Jupiter or IPython you should use `activate_in_ipython_by_import` or `global_print_tb_in_ipython`. IPython handles exceptions differently than regular Python.  
   
 * My code doesn't work.  
 

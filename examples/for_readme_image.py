@@ -15,7 +15,7 @@ def get_ratio(h, w):
 
 def main():
     sizes_str = '300 200 300 0'
-    with printing_tb(color_scheme=ColorSchemes.common):
+    with printing_tb():
         h1, w1, h2, w2 = map(int, sizes_str.split())
 
         return get_avg_ratio((h1, w1), (h2, w2))

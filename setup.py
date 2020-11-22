@@ -23,7 +23,7 @@ setuptools.setup(
               'variables', 'python3', 'stacktrace', 'arguments', 'errors',
               'error-handling', 'dump', 'exception-handling', 'exceptions',
               'pretty', 'pretty-print', 'frame', 'simple',
-              'colors'],
+              'colors', 'jupyer', 'jupyer-notebook', 'ipython', 'customize'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

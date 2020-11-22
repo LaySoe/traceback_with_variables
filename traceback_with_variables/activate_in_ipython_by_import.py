@@ -2,7 +2,8 @@
 For the simplest usage possible. Just import it
 """
 
-from traceback_with_variables.override import override_print_tb, ColorSchemes
+from traceback_with_variables.color import ColorSchemes
+from traceback_with_variables.global_hooks import global_print_tb_in_ipython, Format
 
 
-override_print_tb(ipython=True, color_scheme=ColorSchemes.common)
+global_print_tb_in_ipython(fmt=Format(color_scheme=ColorSchemes.common))

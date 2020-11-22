@@ -1,4 +1,4 @@
-from traceback_with_variables import core, ColorSchemes
+from traceback_with_variables import core, ColorSchemes, Format
 
 from tests.utils import assert_smart_equals_ref
 
@@ -8,15 +8,15 @@ def test_default():
 
 
 def test_ellipsis():
-    check('ellipsis', 10000, ellipsis_='*')
+    check('ellipsis', 10000, fmt=Format(ellipsis_='*'))
 
 
 def test_max_value_str_len():
-    check('max_value_str_len', 10000, max_value_str_len=10)
+    check('max_value_str_len', 10000, fmt=Format(max_value_str_len=10))
 
 
 def test_max_exc_str_len():
-    check('max_exc_str_len', 10000, max_exc_str_len=10)
+    check('max_exc_str_len', 10000, fmt=Format(max_exc_str_len=10))
 
 
 def test_num_skipped_frames():
@@ -24,19 +24,19 @@ def test_num_skipped_frames():
 
 
 def test_num_context_lines():
-    check('num_context_lines', 10000, num_context_lines=5)
+    check('num_context_lines', 10000, fmt=Format(num_context_lines=5))
 
 
 def test_color_scheme_common():
-    check('color_scheme_common', 10000, color_scheme=ColorSchemes.common)
+    check('color_scheme_common', 10000, fmt=Format(color_scheme=ColorSchemes.common))
 
 
 def test_color_scheme_synthwave():
-    check('color_scheme_synthwave', 10000, color_scheme=ColorSchemes.synthwave)
+    check('color_scheme_synthwave', 10000, fmt=Format(color_scheme=ColorSchemes.synthwave))
 
 
-def test_color_scheme_synthwave():
-    check('color_scheme_nice', 10000, color_scheme=ColorSchemes.nice)
+def test_color_scheme_nice():
+    check('color_scheme_nice', 10000, fmt=Format(color_scheme=ColorSchemes.nice))
 
 
 def test_force_bug_mode_1():
