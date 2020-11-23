@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from functools import wraps
 from typing import NoReturn, Union, TextIO, Optional, Callable
 
-from traceback_with_variables.core import iter_tb_lines, Format, OptionalTraceback
+from traceback_with_variables.core import iter_tb_lines, Format, Traceback
 
 
 class LoggerAsFile:
@@ -26,7 +26,7 @@ class LoggerAsFile:
 
 def print_tb(
     e: Optional[Exception] = None,
-    tb: OptionalTraceback = None,
+    tb: Optional[Traceback] = None,
     num_skipped_frames: int = 0,
     fmt: Format = Format(),
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,

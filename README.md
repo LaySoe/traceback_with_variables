@@ -313,6 +313,7 @@ def main():
 ---
 
 #### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`print_tb`</a>
+Prints traceback for a given/current/last (first being not `None` in the priority list) exception to a file, default=`sys.stderr`. Convenient for manual console or Jupyter sessions or custom try/except blocks. Note that it can be called with a given exception value or it can auto discover current exception in an `except:` block or it can auto descover last exception value (long) after `try/catch` block.
 ```python
 print_tb()
 ```
@@ -378,8 +379,19 @@ Iterates the lines, which are usually printed one-by-one in terminal.
   
 * `activate_by_import` or `global_print_tb` don't work in Jupyter or IPython as if not called at all.
 
-    In Jupiter or IPython you should use `activate_in_ipython_by_import` or `global_print_tb_in_ipython`. IPython handles exceptions differently than regular Python.  
+    In Jupyter or IPython you should use `activate_in_ipython_by_import` or `global_print_tb_in_ipython`. IPython handles exceptions differently than regular Python.  
+
+* The server framework (`flask`, `streamlit` etc.) still shows usual tracebacks.
+
+    In such frameworks tracebacks are printed not while exiting the program (the program continues running), hence you should override exception handling in a manner
+    proper for the given framework. Please address the `flask` example.
   
+* I have ideas about good colors.
+
+    Please add a new `ColorScheme` to <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>
+    and create a Pull Request. <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Choose the color codes</a> and visually
+    test it like `python3 -m traceback_with_variables --color-scheme {its name} examples/for_readme_image.py`. 
+
 * My code doesn't work.  
 
     Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your case</a>. You are very welcome!

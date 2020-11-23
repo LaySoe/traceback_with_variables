@@ -3,6 +3,11 @@ from traceback_with_variables import core, ColorSchemes, Format
 from tests.utils import assert_smart_equals_ref
 
 
+# test with e=None in except
+# test with e=None after except
+# test with e=None and tb not None
+
+
 def test_default():
     check('default', 10001)
 

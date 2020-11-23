@@ -8,7 +8,7 @@ from typing import Any, Iterator, Union, Optional, TextIO, NoReturn
 from traceback_with_variables.color import ColorScheme, ColorSchemes, supports_ansi
 
 
-OptionalTraceback = Optional[Union[inspect.Traceback, TracebackType]]
+Traceback = Union[inspect.Traceback, TracebackType]
 
 
 class Format:
@@ -48,18 +48,23 @@ class Format:
 
 def iter_tb_lines(
     e: Optional[Exception] = None,
-    tb: OptionalTraceback = None,
+    tb: Optional[Traceback] = None,
     num_skipped_frames: int = 0,
     fmt: Format = Format(),
     for_file: Optional[TextIO] = None,
     __force_bug_mode: int = 0,  # for tests only
 ) -> Iterator[str]:
-    e_: Exception = e or sys.exc_info()[1]
-    tb_: Union[inspect.Traceback, TracebackType] = tb or sys.exc_info()[2]
-    c: ColorScheme = fmt.color_scheme or \
-        (ColorSchemes.common if (for_file and supports_ansi(for_file)) else ColorSchemes.none)
-
     try:
+        if tb and not e:
+            raise ValueError(f'`e` is None, but `tb` is not None')
+        e_: Exception = e or sys.exc_info()[1] or getattr(sys, 'last_value', None) 
+        if not e_:
+            raise ValueError('cannot print Traceback, no exception happened or passed')
+        tb_: Traceback = tb or sys.exc_info()[2] or getattr(sys, 'last_traceback', None)
+
+        c: ColorScheme = fmt.color_scheme or \
+            (ColorSchemes.common if (for_file and supports_ansi(for_file)) else ColorSchemes.none)
+        
         yield f'{c.c}Traceback with variables (most recent call last):{c.e}'
 
         for frame, filename, line_num, func_name, code_lines, func_line_num in \
