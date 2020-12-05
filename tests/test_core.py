@@ -1,3 +1,5 @@
+import pytest
+
 from traceback_with_variables import core, ColorSchemes, Format
 
 from tests.utils import assert_smart_equals_ref
@@ -28,8 +30,18 @@ def test_num_skipped_frames():
     check('num_skipped_frames', 10001, num_skipped_frames=1)
 
 
-def test_num_context_lines():
-    check('num_context_lines', 10000, fmt=Format(num_context_lines=5))
+@pytest.mark.parametrize('before', [0, 2, 100])
+def test_before(before):
+    check(f'before_{before}', 10000, fmt=Format(before=before))
+
+
+@pytest.mark.parametrize('after', [0, 2, 100])
+def test_after(after):
+    check(f'after_{after}', 10000, fmt=Format(after=after))
+
+
+def test_before_after():
+    check('before_after', 10000, fmt=Format(before=2, after=2))
 
 
 def test_color_scheme_common():
@@ -67,14 +79,15 @@ def f(n: int) -> int:
     if n % 10 == 0:
         return 1 // (n * 0)
 
-    if n % 2 == 0:
-        return f(n - 1)
-    else:
-        return f(
-            n
+    if True:
+        if n % 2 == 0:
+            return f(n - 1)
+        else:
+            return f(
+                n
 
-            - 1
-        )
+                - 1
+            )
 
 
 class Unprintable:

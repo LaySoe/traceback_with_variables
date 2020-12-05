@@ -11,7 +11,8 @@ def main():
             e=e,
             tb=None,
             fmt=Format(
-                num_context_lines=3,
+                before=3,
+                after=1,
                 max_value_str_len=100,
                 max_exc_str_len=1000,
                 ellipsis_='...',

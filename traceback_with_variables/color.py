@@ -61,6 +61,7 @@ class ColorScheme:
 
 
 class ColorSchemes:
+    auto = None
     none = ColorScheme('', '', '', '', '', '', '', '', '', '')
     common = ColorScheme('36', '36;1', '36;1', '36;1', '35', '32;1', '', '31', '91', '0')
     synthwave = ColorScheme('38;2;255;153;255', '38;2;255;153;0', '38;2;255;153;0', '38;2;255;153;0',

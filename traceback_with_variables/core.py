@@ -17,13 +17,15 @@ class Format:
         max_value_str_len: int = 1000,
         max_exc_str_len: int = 10000,
         ellipsis_: str = '...',
-        num_context_lines: int = 1,
+        before: int = 0,
+        after: int = 0,
         color_scheme: Optional[ColorScheme] = None,
     ):
         self.max_value_str_len = max_value_str_len
         self.max_exc_str_len = max_exc_str_len
         self.ellipsis_ = ellipsis_
-        self.num_context_lines = num_context_lines
+        self.before = before
+        self.after = after
         self.color_scheme = color_scheme
 
     @classmethod
@@ -31,9 +33,10 @@ class Format:
         parser.add_argument("--max-value-str-len", type=int, default=1000)
         parser.add_argument("--max-exc-str-len", type=int, default=10000)
         parser.add_argument("--ellipsis", default="...")
-        parser.add_argument("--num-context-lines", type=int, default=1)
+        parser.add_argument("--before", type=int, default=0)
+        parser.add_argument("--after", type=int, default=0)
         parser.add_argument("--color-scheme", default='auto',
-                            choices=['auto'] + [a for a in dir(ColorSchemes) if not a.startswith('_')])
+                            choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
 
     @classmethod
     def parse(cls, ns: argparse.Namespace) -> 'Format':
@@ -41,8 +44,9 @@ class Format:
             max_value_str_len=ns.max_value_str_len,
             max_exc_str_len=ns.max_exc_str_len,
             ellipsis_=ns.ellipsis,
-            num_context_lines=ns.num_context_lines,
-            color_scheme=None if ns.color_scheme == 'auto' else getattr(ColorSchemes, ns.color_scheme),
+            before=ns.before,
+            after=ns.after,
+            color_scheme=getattr(ColorSchemes, ns.color_scheme),
         )
 
 
@@ -67,12 +71,21 @@ def iter_tb_lines(
         
         yield f'{c.c}Traceback with variables (most recent call last):{c.e}'
 
-        for frame, filename, line_num, func_name, code_lines, func_line_num in \
-                inspect.getinnerframes(tb_, context=fmt.num_context_lines)[num_skipped_frames:]:
+        for frame, filename, line_num, func_name, code_lines, before in \
+                inspect.getinnerframes(tb_, context=max(fmt.before, fmt.after) + 1)[num_skipped_frames:]:
             yield f'{c.c}  File "{c.f_}{filename}{c.c_}", line {c.ln_}{line_num}{c.c_}, in {c.fn_}{func_name}{c.e}'
 
             if code_lines:
-                yield f'{c.c}    {c.fs_}{"".join(code_lines).strip()}{c.e}'
+                code_lines = code_lines[max(0, before - fmt.before):before + 1 + fmt.after]
+                code_lines = [line.replace('\t', '    ').rstrip() for line in code_lines]
+                min_indent = min(len(line) - len(line.lstrip(' ')) for line in code_lines)
+
+                for i, line in enumerate(code_lines):
+                    prefix = '  '
+                    if fmt.after or fmt.before:
+                        prefix = '> ' if max(0, before - fmt.before) + i == before else '. '
+
+                    yield f'{c.c}  {prefix}{c.fs_}{line[min_indent:]}{c.e}'
 
             try:
                 for var_name, var in frame.f_locals.items():

@@ -7,5 +7,3 @@ def handle_exception(e):
 
     return 'Server Error', 500  # for prod
     return '\n'.join(iter_tb_lines(e)), 500  # for debug mode
-
-

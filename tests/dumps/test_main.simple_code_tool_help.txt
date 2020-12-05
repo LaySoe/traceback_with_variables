@@ -1,6 +1,6 @@
 usage: main.py [-h] [--max-value-str-len MAX_VALUE_STR_LEN]
                [--max-exc-str-len MAX_EXC_STR_LEN] [--ellipsis ELLIPSIS]
-               [--num-context-lines NUM_CONTEXT_LINES]
+               [--before BEFORE] [--after AFTER]
                [--color-scheme {auto,common,nice,none,synthwave}]
                script [script-arg ...]
 
@@ -13,5 +13,6 @@ optional arguments:
   --max-value-str-len MAX_VALUE_STR_LEN
   --max-exc-str-len MAX_EXC_STR_LEN
   --ellipsis ELLIPSIS
-  --num-context-lines NUM_CONTEXT_LINES
+  --before BEFORE
+  --after AFTER
   --color-scheme {auto,common,nice,none,synthwave}

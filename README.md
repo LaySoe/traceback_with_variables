@@ -272,7 +272,8 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 #### All functions have `fmt=` argument, a `Format` object with fields:
 * `max_value_str_len` max length of each variable string, -1 to disable, default=1000
 * `max_exc_str_len` max length of exception, should variable print fail, -1 to disable, default=10000
-* `num_context_lines` number of lines around the target code line to print, default=1
+* `before` number of code lines before the raising line, default=0
+* `after` number of code lines after the raising line, default=0
 * `ellipsis_` string to denote long strings truncation, default=`...`
 * `color_scheme` is `None` or one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.none` , `.common`, `.nice`, `.synthwave`. `None` is for auto-detect. 
 
@@ -388,9 +389,9 @@ Iterates the lines, which are usually printed one-by-one in terminal.
   
 * I have ideas about good colors.
 
-    Please add a new `ColorScheme` to <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>
-    and create a Pull Request. <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Choose the color codes</a> and visually
-    test it like `python3 -m traceback_with_variables --color-scheme {its name} examples/for_readme_image.py`. 
+    Please fork, add a new `ColorScheme` to <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>
+    and create a Pull Request to `next_version` branch. <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Choose the color codes</a> and visually
+    test it like `python3 -m traceback_with_variables.main --color-scheme {its name} examples/for_readme_image.py`. 
 
 * My code doesn't work.  
 
