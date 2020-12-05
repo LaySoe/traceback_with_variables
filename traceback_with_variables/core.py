@@ -60,7 +60,7 @@ def iter_tb_lines(
 ) -> Iterator[str]:
     try:
         if tb and not e:
-            raise ValueError(f'`e` is None, but `tb` is not None')
+            raise ValueError('`e` is None, but `tb` is not None')
         e_: Exception = e or sys.exc_info()[1] or getattr(sys, 'last_value', None)
         if not e_:
             raise ValueError('cannot print Traceback, no exception happened or passed')
