@@ -18,7 +18,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/andy-landy/traceback_with_variables',
-    packages=setuptools.find_packages(),
+    packages=['traceback_with_variables'],
     keywords=['python', 'traceback', 'locals', 'logging', 'debugging', 'print',
               'variables', 'python3', 'stacktrace', 'arguments', 'errors',
               'error-handling', 'dump', 'exception-handling', 'exceptions',

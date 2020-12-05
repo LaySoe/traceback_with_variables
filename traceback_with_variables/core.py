@@ -61,14 +61,14 @@ def iter_tb_lines(
     try:
         if tb and not e:
             raise ValueError(f'`e` is None, but `tb` is not None')
-        e_: Exception = e or sys.exc_info()[1] or getattr(sys, 'last_value', None) 
+        e_: Exception = e or sys.exc_info()[1] or getattr(sys, 'last_value', None)
         if not e_:
             raise ValueError('cannot print Traceback, no exception happened or passed')
         tb_: Traceback = tb or sys.exc_info()[2] or getattr(sys, 'last_traceback', None)
 
         c: ColorScheme = fmt.color_scheme or \
             (ColorSchemes.common if (for_file and supports_ansi(for_file)) else ColorSchemes.none)
-        
+
         yield f'{c.c}Traceback with variables (most recent call last):{c.e}'
 
         for frame, filename, line_num, func_name, code_lines, before in \
