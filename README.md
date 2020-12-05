@@ -39,6 +39,10 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 
 ---
 
+> :warning: **This module is actively updated and has a substantial list of features to add this week**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
+
+---
+
 ### Installation
 
 ```
@@ -233,7 +237,9 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 * — Should I use it after debugging is over, i.e. *in production*?
 
-    Yes, of course! That way it might save you even more time.
+    Yes, of course! That way it might save you even more time (watch out for sensitive data
+    like passwords and tokens in you logs). Note: you can deploy more serious frameworks,
+    e.g. `Sentry` :)
 
 <br/>
 
